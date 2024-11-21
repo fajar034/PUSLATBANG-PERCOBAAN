@@ -13,8 +13,7 @@
 
     <!-- Fonts and Styles -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -23,12 +22,10 @@
     <link href="{{ asset('img/lanriicon.png') }}" rel="icon" type="image/png">
 
     <style>
-        body {
-            background-color: white;
-        }
-
+        /* Navbar */
         .navbar-custom {
-            background-color: transparent;
+            background-color: rgba(82, 92, 101, 0.8);
+            backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
             left: 0;
@@ -38,200 +35,160 @@
         }
 
         .navbar-custom.navbar-scrolled {
-            background-color: #525c65;
-        }
-
-        .navbar-logo img {
-            height: 50px;
+            background-color: rgba(82, 92, 101, 1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .navbar-nav .nav-link {
-            color: #060606;
+            color: #ffffff;
             font-weight: bold;
             font-size: 18px;
+            transition: color 0.3s ease;
         }
 
         .navbar-nav .nav-link:hover {
-            color: #ffffff;
+            color: #ffcb47;
         }
 
-        .wrapper {
-            margin-top: 0px;
-
+        /* Card */
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
         }
 
-        .footer {
-            background-color: #343a40;
-            color: #ffffff;
-            padding: 1px 10px;
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        .footer .container {
-            margin-bottom: 10px;
+        .card-body h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #060606;
+            transition: color 0.3s;
         }
 
+        .card:hover .card-body h2 {
+            color: #ffcb47;
+        }
+
+        .card i {
+            color: #525c65;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .card:hover i {
+            color: #ffcb47;
+            transform: scale(1.2);
+        }
+
+        /* Slideshow */
         .carousel-item img {
             width: 100%;
             height: 90vh;
             object-fit: cover;
+            animation: fade-zoom 1.5s ease-in-out;
         }
 
-        .card {
-            position: relative;
-            /* Agar elemen anak bisa diposisikan relatif */
-            overflow: hidden;
-            /* Mencegah overflow dari latar belakang */
-        }
-
-        .card::after {
-            content: "";
+        .carousel-caption {
             position: absolute;
-            top: 50%;
+            bottom: 20%;
             left: 50%;
-            width: 300%;
-            /* Lebar gradien */
-            height: 300%;
-            /* Tinggi gradien */
-            background-color: #525c65;
-            /* Warna background saat hover */
-            border-radius: 50%;
-            /* Membuat gradien menjadi bulat */
-            transform: translate(-50%, -50%) scale(0);
-            /* Memusatkan dan menyembunyikan gradien */
-            transition: transform 0.9s ease;
-            /* Animasi saat hover */
-            z-index: 0;
-            /* Menempatkan gradien di belakang konten */
-        }
-
-        .card:hover::after {
-            transform: translate(-50%, -50%) scale(1);
-            /* Memperbesar gradien saat hover */
-        }
-
-        .card-body {
-            position: relative;
-            /* Agar konten tetap di atas gradien */
-            z-index: 1;
-            /* Menempatkan konten di atas gradien */
-            transition: color 0.3s ease;
-            /* Animasi perubahan warna teks */
-        }
-
-        .card:hover .card-body {
+            transform: translateX(-50%);
             color: #ffffff;
-            /* Ubah warna teks menjadi putih saat hover */
+            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
         }
 
-        .card:hover i {
+        .carousel-caption p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        @keyframes fade-zoom {
+            0% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(145deg, #343a40, #23272b);
             color: #ffffff;
-            /* Ubah warna ikon menjadi putih saat hover */
+            padding: 20px 10px;
+            box-shadow: inset 2px 2px 10px #1d1f21, inset -2px -2px 10px #3f454b;
         }
 
-        @media (max-width: 767px) {
-            .navbar-logo img {
-                height: 40px;
-                /* Ukuran logo yang lebih kecil untuk mobile */
-            }
-
-            .navbar-custom {
-                background-color: #525c65;
-                /* Ganti warna navbar pada mobile agar lebih kontras */
-            }
-
-            .navbar-toggler {
-                border: none;
-                outline: none;
-            }
-
-            .navbar-toggler-icon {
-                font-size: 24px;
-            }
-
-            .navbar-nav .nav-link {
-                color: white;
-                font-size: 16px;
-            }
-
-            .navbar-nav .nav-link:hover {
-                color: #cccccc;
-            }
-
-            .carousel-item img {
-                height: 80vh;
-            }
-        }
-
-        @media (max-width: 426px) {
-            .carousel-item img {
-                height: 70vh;
-            }
+        .footer .col img:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Wrapper untuk seluruh halaman -->
+    <!-- Wrapper -->
     <div class="wrapper">
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container">
-                <!-- Logo -->
                 <a class="navbar-logo" href="#">
                     <img src="{{ url('img/lanrinobg.png') }}" alt="Lan Logo">
                 </a>
-
-                <!-- Button Toggler (untuk mobile view) -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
                     aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <i class="fas fa-bars" style="color: #060606;"></i>
                     </span>
                 </button>
-
-                <!-- Center Navbar Links (collapsed in mobile) -->
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="ruangan-user">Ruangan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="booking-user">Booking</a>
-                        </li>
-
-
-                <!-- Tombol Login/Logout -->
+                        <li class="nav-item active"><a class="nav-link" href="ruangan-user">Ruangan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="booking-user">Booking</a></li>
+                    </ul>
+                </div>
                 @guest
                     <a href="{{ route('login') }}" class="btn btn-primary ml-3">Admin Login</a>
                 @endguest
-
                 @auth
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="{{ route('logout') }}" class="btn btn-primary ml-3" 
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                    <a href="{{ route('logout') }}" class="btn btn-primary ml-3"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 @endauth
             </div>
         </nav>
-
-
 
         <!-- Slideshow -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('img/assets/lan3.jpg') }}" class="d-block" alt="Slide 1">
+                    <img src="{{ asset('img/assets/lan3.jpg') }}" alt="Slide 1">
+                    <div class="carousel-caption">
+                        <h1>Selamat Datang di Puslatbang Khan LAN RI</h1>
+                        <p>Kami berkomitmen untuk memberikan pelayanan terbaik bagi Anda.</p>
+                    </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('img/assets/lan2.jpg') }}" class="d-block" alt="Slide 2">
+                    <img src="{{ asset('img/assets/lan2.jpg') }}" alt="Slide 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('img/assets/lan1.jpg') }}" class="d-block" alt="Slide 3">
+                    <img src="{{ asset('img/assets/lan1.jpg') }}" alt="Slide 3">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -244,87 +201,54 @@
             </a>
         </div>
 
-        <!-- Teks Tambahan di Bawah Slideshow -->
-        <div class="container text-center my-5">
-            <h2 style="border-bottom: 2px solid #000; display: inline-block;">Selamat Datang di Puslatbang Khan LAN RI
-            </h2>
-            <p>Kami berkomitmen untuk memberikan pelayanan terbaik bagi Anda</p>
-        </div>
-
-        <!-- Section for 2 Booking Now Columns -->
+        <!-- Section for Booking -->
         <section class="services py-5">
             <div class="container text-center">
-                <h2 style="border-bottom: 2px solid #000; display: inline-block;">PUSLATBANG KHAN LAN RI</h2>
+                <h2>PUSLATBANG KHAN LAN RI</h2>
                 <h2 class="text-center small text-muted mb-5">BANGGA MELAYANI BANGSA</h2>
-
                 <div class="row">
-                    <!-- Card for Room Features -->
-                    <div class="col-md-6 mb-4">
-                        <a href="{{ route('ruangan-user.index') }}"
-                            class="card text-center h-100 text-decoration-none">
-                            <div class="card-body">
-                                <i class="fas fa-door-open fa-3x mb-3" style="color: #060606;"></i>
-                                <!-- Ikon Ruangan -->
-                                <h2>Ruangan</h2>
-                                <p>Menyediakan Berbagai Macam Ruangan Untuk Kepentingan Anda</p>
-                            </div>
-                        </a>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <a href="ruangan-user">
+                                <i class="fas fa-door-open fa-3x my-4"></i>
+                                <div class="card-body">
+                                    <h2>Ruangan</h2>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-
-                    <!-- Card for Booking Features -->
-                    <div class="col-md-6 mb-4">
-                        <a href="{{ route('booking-user.store') }}"
-                            class="card text-center h-100 text-decoration-none">
-                            <div class="card-body">
-                                <i class="fas fa-calendar-check fa-3x mb-3" style="color: #060606;"></i>
-                                <!-- Ikon Booking -->
-                                <h2>Booking</h2>
-                                <p>Sewa Ruangan Sesuai dengan Kebutuhan Anda</p>
-                            </div>
-                        </a>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <a href="booking-user">
+                                <i class="fas fa-calendar-check fa-3x my-4"></i>
+                                <div class="card-body">
+                                    <h2>Booking</h2>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="footer py-1">
-            <div class="container">
-                <div class="row d-flex align-items-center justify-content-between text-center">
-                    <div class="col-auto">
-                        <img src="{{ asset('img/Picture1.png') }}" alt="Logo 1" class="img-fluid"
-                            style="max-height: 50px; margin-right: 15px;">
-                    </div>
-
-                    <div class="col text-muted">
-                        <span>&copy; Teknik Komputer USK 21</span>
-                    </div>
-
-                    <div class="col-auto">
-                        <img src="{{ asset('img/HIMATEKKOM 2.png') }}" alt="Logo 3" class="img-fluid"
-                            style="max-height: 50px; margin-left: 15px;">
-                    </div>
-                </div>
-            </div>
+        <footer class="footer text-center">
+            <p>&copy; 2024 PUSLATBANG KHAN LAN RI. All rights reserved.</p>
         </footer>
+    </div>
 
-
-
-        <!-- Scripts -->
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-        <!-- Script untuk mengubah warna navbar setelah scroll -->
-        <script>
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 100) {
-                    $('.navbar-custom').addClass('navbar-scrolled');
-                } else {
-                    $('.navbar-custom').removeClass('navbar-scrolled');
-                }
-            });
-        </script>
-
+    <!-- Scripts -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+        $(document).on("scroll", function () {
+            if ($(this).scrollTop() > 50) {
+                $(".navbar-custom").addClass("navbar-scrolled");
+            } else {
+                $(".navbar-custom").removeClass("navbar-scrolled");
+            }
+        });
+    </script>
 </body>
 
 </html>
