@@ -142,6 +142,19 @@
     <div class="container">
         <h1 class="mb-4 text-center">DAFTAR RUANGAN</h1>
 
+        <!-- Form Filter -->
+        <form method="GET" action="/rooms" class="filter-form">
+            <label for="class">Filter Kelas:</label>
+            <select name="class" id="class">
+                <option value="">Semua</option>
+                <option value="VVIP" {{ request('class') == 'VVIP' ? 'selected' : '' }}>VVIP</option>
+                <option value="VIP" {{ request('class') == 'VIP' ? 'selected' : '' }}>VIP</option>
+                <option value="Reguler" {{ request('class') == 'Reguler' ? 'selected' : '' }}>Reguler</option>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+
+
         @php
         $currentFloor = null;
         @endphp
@@ -157,9 +170,8 @@
         </div>
         <div class="row">
             @endif
-
             <!-- Daftar ruangan dalam grid per lantai -->
-            <div class="col-lg-4 col-md-6 col-sm-12 margin">
+            <div class="col-lg-4 col-md-6 col-sm-12 margin border border-primary">
                 <div class="card shadow-sm">
                     <img src="{{ asset('storage/ruangan/' . $ruangan->image) }}" class="room-image"
                         alt="{{ $ruangan->nama_ruangan }}">
@@ -170,7 +182,6 @@
                     </div>
                 </div>
             </div>
-
             @if ($loop->last || $ruangans[$loop->index + 1]->lantai !== $ruangan->lantai)
         </div> <!-- Akhiri .row jika lantai berbeda atau terakhir -->
         @endif

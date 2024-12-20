@@ -32,8 +32,8 @@ use App\Http\Controllers\TvScreenController;
             //         return redirect()->route('login');
             //     }
             // });
-            
-            
+
+
 
 
 Route::get('/ruangan-user', [RuanganUserController::class, 'index'])->name('ruangan-user.index');
