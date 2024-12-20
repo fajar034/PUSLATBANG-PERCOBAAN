@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Laravel SB Admin 2
 
 SB Admin 2 for Laravel.
@@ -81,3 +82,8 @@ Laravel SB Admin 2 uses some open-source third-party libraries/packages, many th
 ## License
 
 Licensed under the [MIT](LICENSE) license.
+=======
+
+>>>>>>> 5d60ea0d74c8e9891766e4370917ab4a00f4a5fa
+# PUSLATBANG-PERCOBAAN
+percobaan untuk menambah fitur pengurutan harga yang akan di salin ke puslatbang-team ketika sudah selesai menambah fiturnya.
