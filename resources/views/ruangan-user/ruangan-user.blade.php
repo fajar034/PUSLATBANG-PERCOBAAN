@@ -24,6 +24,40 @@
             border-radius: 10px;
         }
 
+        .container label {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 0.25rem;
+            margin-bottom: 0;
+        }
+
+        .container label i {
+            display: flex;
+        }
+
+        .container label p {
+            line-height: 100%;
+            font-size: 1rem;
+        }
+
+        /*.container label p {
+            font-size: 1rem;
+            border: 2px solid black;
+        }*/
+
+        .container select {
+            padding: 0.5em;
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+        .container .select option {
+            color: #333;
+            background-color: #fff;
+        }
+
         .margin {
             margin: 1rem 0;
         }
@@ -142,18 +176,24 @@
     <div class="container">
         <h1 class="mb-4 text-center">DAFTAR RUANGAN</h1>
 
-        <!-- Form Filter -->
-        <form method="GET" action="/rooms" class="filter-form">
-            <label for="class">Filter Kelas:</label>
-            <select name="class" id="class">
-                <option value="">Semua</option>
-                <option value="VVIP" {{ request('class') == 'VVIP' ? 'selected' : '' }}>VVIP</option>
-                <option value="VIP" {{ request('class') == 'VIP' ? 'selected' : '' }}>VIP</option>
-                <option value="Reguler" {{ request('class') == 'Reguler' ? 'selected' : '' }}>Reguler</option>
+        <!-- (BARU) Form Filter dan Pengurutan Harga -->
+        <form method="GET" action="/ruangan-user" class="mb-4">
+            <label for="order"><i class="fa-solid fa-arrow-down-short-wide"></i><p>Urutan</p></label>
+            <select name="order" value="fajar" id="order" onchange="this.form.submit()" class="select rounded">
+                <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Harga Terendah</option>
+                <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Harga Tertinggi</option>
             </select>
-            <button type="submit">Filter</button>
         </form>
 
+        <!-- (BARU), jangan dihapus, jika perlu digunakan
+        <div class="mb-4">
+            <h4>Contoh Harga:</h4>
+            <ul>
+                @foreach($hargaUnik as $harga)
+                    <li>IDR {{ number_format($harga, 0, ',', '.') }}</li>
+                @endforeach
+            </ul>
+        </div> -->
 
         @php
         $currentFloor = null;
@@ -170,14 +210,15 @@
         </div>
         <div class="row">
             @endif
-            <!-- Daftar ruangan dalam grid per lantai -->
-            <div class="col-lg-4 col-md-6 col-sm-12 margin border border-primary">
+            <!-- (BARU) Daftar ruangan dalam grid per lantai -->
+            <div class="col-lg-4 col-md-6 col-sm-12 margin border">
                 <div class="card shadow-sm">
                     <img src="{{ asset('storage/ruangan/' . $ruangan->image) }}" class="room-image"
                         alt="{{ $ruangan->nama_ruangan }}">
                     <div class="room-body">
                         <h5 class="card-title">{{ $ruangan->nama_ruangan }}</h5>
                         <p class="card-text text-muted">Kapasitas: {{ $ruangan->kapasitas_ruangan }} orang</p>
+                        <p class="card-text text-success">IDR {{ number_format($ruangan->harga, 0, ',', '.') }}</p>
                         <a href="{{ route('booking-user.create', $ruangan->id) }}" class="btn btn-primary">Booking</a>
                     </div>
                 </div>

@@ -11,11 +11,21 @@ class RuanganUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ruangans = Ruangan::orderBy('lantai', 'asc')->get();
+        // Ambil parameter 'order' dari query string atau default 'asc'
+        $order = $request->query('order', 'asc');
 
-        return view('ruangan-user.ruangan-user', compact('ruangans'));
+        // Ambil data ruangan berdasarkan harga dan lantai
+        $ruangans = Ruangan::orderBy('harga', $order)
+            ->orderBy('lantai', 'asc')
+            ->get();
+
+        // Ambil harga unik (contoh 3 harga yang berbeda)
+        $hargaUnik = Ruangan::select('harga')->distinct()->take(3)->pluck('harga');
+
+        // Kirim data ke view
+        return view('ruangan-user.ruangan-user', compact('ruangans', 'hargaUnik', 'order'));
     }
 
     /**
