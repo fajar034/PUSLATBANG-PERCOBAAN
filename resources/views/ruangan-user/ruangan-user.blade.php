@@ -146,7 +146,7 @@
         <form method="GET" action="/rooms" class="filter-form">
             <label for="class">Filter Kelas:</label>
             <select name="class" id="class">
-                <option value="">Semua</option>
+                <option value="">Semua</option> 
                 <option value="VVIP" {{ request('class') == 'VVIP' ? 'selected' : '' }}>VVIP</option>
                 <option value="VIP" {{ request('class') == 'VIP' ? 'selected' : '' }}>VIP</option>
                 <option value="Reguler" {{ request('class') == 'Reguler' ? 'selected' : '' }}>Reguler</option>
