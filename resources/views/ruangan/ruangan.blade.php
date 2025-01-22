@@ -43,6 +43,7 @@
                                             <th>Lantai</th>
                                             <th>Kapasitas Ruangan</th>
                                             <th>Gambar</th>
+                                            <th>Deskripsi</th>
                                             <th>PIC</th>
                                             <th>Jumlah</th>
                                             <th>Aksi</th>
@@ -62,6 +63,7 @@
                                                         Tidak ada gambar
                                                     @endif
                                                 </td>
+                                                <td>{{ $ruangan->deskripsi }}</td>
                                                 <td>{{ $ruangan->pic ? $ruangan->pic->nama_pic : 'Tidak ada PIC' }}</td>
                                                 <td>{{ $ruangan->jumlah }}</td>
                                                 <td>
@@ -87,5 +89,4 @@
             </div>
         </div>
     </div>
-
 @endsection

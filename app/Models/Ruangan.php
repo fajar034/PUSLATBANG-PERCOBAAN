@@ -10,7 +10,12 @@ class Ruangan extends Model
     protected $table = 'ruangan'; 
 
     protected $fillable = [
-        'pic_id', 'lantai', 'nama_ruangan', 'kapasitas_ruangan'
+        'pic_id', 
+        'lantai', 
+        'nama_ruangan', 
+        'kapasitas_ruangan',
+        'deskripsi',   // Kolom baru
+        'fasilitas', // Kolo, baru
     ];
 
     public function pic()

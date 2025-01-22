@@ -47,7 +47,8 @@ class RuanganController extends Controller
             'kapasitas_ruangan' => 'required',
             'pic_id' => 'required',
             'jumlah' => 'required',
-            'image' => 'required|image|max:1000'
+            'image' => 'required|image|max:1000',
+            'deskripsi' => 'nullable|string',
         ], [
             'nama_ruangan.required' => 'Nama wajib diisi',
             'nama_ruangan.string' => 'Nama harus berupa teks',
@@ -64,7 +65,8 @@ class RuanganController extends Controller
 
             'image.required' => 'image harus diisi',
             'image.image' => 'image harus berupa jpg/jpeg/png',
-            'image.max:1000' => 'ukuran image maksimal 1000kb'
+            'image.max:1000' => 'ukuran image maksimal 1000kb',
+            'deskripsi' => 'Deskripsi Harus Diisi Terlebih Dahulu',
 
         ]);
 
@@ -77,6 +79,7 @@ class RuanganController extends Controller
         $ruangan->kapasitas_ruangan = $request->kapasitas_ruangan;
         $ruangan->jumlah = $request->jumlah;
         $file = $request->file('image');
+        $ruangan->deskripsi = $request->deskripsi;
         
     
         // Storage::putFileAs('photos', new File('public/ruangan'), $file->getClientOriginalName());
@@ -132,7 +135,8 @@ class RuanganController extends Controller
             'kapasitas_ruangan' => 'required',
             'pic_id' => 'required',
             'jumlah' => 'required',
-            'image' => 'required|image|max:1000'
+            'image' => 'required|image|max:1000',
+            'deskripsi' => 'nullable|string',
         ], [
             'nama_ruangan.required' => 'Nama wajib diisi',
             'nama_ruangan.string' => 'Nama harus berupa teks',
@@ -161,6 +165,7 @@ class RuanganController extends Controller
         $ruangan->kapasitas_ruangan = $request->kapasitas_ruangan;
         $ruangan->jumlah = $request->jumlah;
         $file = $request->file('image');
+        $ruangan->deskripsi = $request->deskripsi;
         
         if ($ruangan->image) {
             Storage::delete('public/ruangan/' . $ruangan->image);

@@ -105,6 +105,16 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="deskripsi">Deskripsi</label>
+                                        <textarea id="deskripsi" name="deskripsi" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                                                 
+
                         </div>
 
                         <!-- Button -->
