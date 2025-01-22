@@ -38,6 +38,13 @@ use App\Http\Controllers\TvScreenController;
 
 Route::get('/ruangan-user', [RuanganUserController::class, 'index'])->name('ruangan-user.index');
 
+Route::get('/ruangan/confirm/{id}', [RuanganUserController::class, 'confirm'])->name('confirm');
+
+// Route::get('/confirm', function () {
+//     return view('ruangan-user.confirm');
+// });
+
+
 
 
 // routing booking user

@@ -42,6 +42,13 @@ class RuanganUserController extends Controller
         //
     }
 
+    public function confirm(string $id)
+    {
+        $ruangans = Ruangan::orderBy('lantai', 'asc')->get();
+
+        return view('ruangan-user.confirm_ruangan', compact('ruangans'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

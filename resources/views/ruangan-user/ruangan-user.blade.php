@@ -178,7 +178,8 @@
                     <div class="room-body">
                         <h5 class="card-title">{{ $ruangan->nama_ruangan }}</h5>
                         <p class="card-text text-muted">Kapasitas: {{ $ruangan->kapasitas_ruangan }} orang</p>
-                        <a href="{{ route('booking-user.create', $ruangan->id) }}" class="btn btn-primary">Booking</a>
+                        {{-- {{ route('booking-user.create', $ruangan->id) }} --}}
+                        <a href="{{ route('confirm', $ruangan->id) }}" class="btn btn-primary">Booking</a>
                     </div>
                 </div>
             </div>
