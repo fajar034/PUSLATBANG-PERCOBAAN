@@ -45,6 +45,7 @@
                                             <th>Gambar</th>
                                             <th>PIC</th>
                                             <th>Jumlah</th>
+                                            <th>Harga</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -64,13 +65,13 @@
                                                 </td>
                                                 <td>{{ $ruangan->pic ? $ruangan->pic->nama_pic : 'Tidak ada PIC' }}</td>
                                                 <td>{{ $ruangan->jumlah }}</td>
+                                                <td>{{ $ruangan->harga }}</td>
                                                 <td>
                                                     <a href="{{ route('ruangan.edit', $ruangan->id) }}"
                                                         class="btn btn-sm btn-primary">Edit</a>
                                                     <form action="{{ route('ruangan.destroy', $ruangan->id) }}"
                                                         method="POST" style="display:inline-block;"
                                                         onsubmit="return confirm('Apakah kamu yakin ingin menghapus data ini?');">
-
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

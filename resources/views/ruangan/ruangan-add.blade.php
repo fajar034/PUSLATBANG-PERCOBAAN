@@ -98,6 +98,16 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
+                                        <label class="form-control-label" for="harga">Harga<span
+                                                class="small text-danger">*</span></label>
+                                        <input type="number" id="harga" name="harga" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
                                         <label class="form-control-label" for="image">image<span
                                                 class="small text-danger">*</span></label>
                                         <input type="file" id="image" name="image">

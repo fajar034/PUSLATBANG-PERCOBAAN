@@ -78,9 +78,9 @@
                                         <label class="form-control-label" for="pic_id">PIC<span
                                                 class="small text-danger">*</span></label>
                                         <select id="pic_id" class="form-control" name="pic_id">
-                                            <option value="">Pilih PIC </option>    
+                                            <option value="">Pilih PIC </option>
                                             @foreach ($pics as $pic)
-                                                <option value="{{ $pic->id }}"  
+                                                <option value="{{ $pic->id }}"
                                                     {{ $ruangan->pic_id == $pic->id ? 'selected' : '' }}>
                                                     {{ $pic->nama_pic }}</option>
                                             @endforeach
@@ -94,7 +94,17 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="jumlah">Jumlah<span
                                                 class="small text-danger">*</span></label>
-                                        <input type="number" id="jumlah" name="jumlah" class="form-control" value={{ $ruangan->jumlah }}>
+                                        <input type="number" id="jumlah" name="jumlah" class="form-control" value="{{ $ruangan->jumlah }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="harga">Harga<span
+                                                class="small text-danger">*</span></label>
+                                        <input type="number" id="harga" name="harga" class="form-control" value="{{ $ruangan->harga }}">
                                     </div>
                                 </div>
                             </div>
