@@ -98,6 +98,50 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Card Riwayat Booking (Confirmed & Canceled) -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Riwayat Booking</h3>
+                        </div>
+                        <div class="card-body">
+                            @if($confirmedBookings->isEmpty())
+                                <p>Tidak ada riwayat booking yang dikonfirmasi atau dibatalkan.</p>
+                            @else
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Nama Pengguna</th>
+                                            <th>Tanggal Booking</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($confirmedBookings as $index => $booking)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $booking->nama_pengunjung }}</td>
+                                            <td>{{ $booking->tanggal }}</td>
+                                            <td>
+                                                @if($booking->status == 'booked')
+                                                    <span class="badge badge-success">Booked</span>
+                                                @else
+                                                    <span class="badge badge-danger">Canceled</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <!-- Optional action buttons -->
+                                                <a href="{{ route('booking.edit', $booking->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

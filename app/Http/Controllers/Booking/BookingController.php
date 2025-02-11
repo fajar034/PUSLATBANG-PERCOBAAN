@@ -23,7 +23,14 @@ class BookingController extends Controller
         $bookings = Booking::orderBy('tanggal', 'asc')->get();
         $ruangans = Ruangan::all();
 
-        return view('booking.booking', compact('bookings', 'ruangans'));
+        // Mengambil daftar booking yang belum dikonfirmasi (pending)
+        $pendingBookings = Booking::where('status', 'pending')->get();
+
+        // Mengambil daftar booking yang sudah dikonfirmasi atau dibatalkan
+        $confirmedBookings = Booking::whereIn('status', ['booked', 'canceled'])->get();
+
+
+        return view('booking.booking', compact('bookings', 'ruangans', 'pendingBookings', 'confirmedBookings'));
     }
 
     /**
