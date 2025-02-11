@@ -124,6 +124,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $booking->nama_pengunjung }}</td>
                                             <td>{{ $booking->tanggal }}</td>
+                                            <td>{{ $booking->status_changed_at ? $booking->status_changed_at->format('d-m-Y H:i') : 'Belum ada perubahan' }}</td>
                                             <td>
                                                 @if($booking->status == 'booked')
                                                     <span class="badge badge-success">Booked</span>

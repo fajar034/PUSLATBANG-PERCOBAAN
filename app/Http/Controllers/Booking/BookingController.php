@@ -29,7 +29,6 @@ class BookingController extends Controller
         // Mengambil daftar booking yang sudah dikonfirmasi atau dibatalkan
         $confirmedBookings = Booking::whereIn('status', ['booked', 'canceled'])->get();
 
-
         return view('booking.booking', compact('bookings', 'ruangans', 'pendingBookings', 'confirmedBookings'));
     }
 
@@ -39,7 +38,6 @@ class BookingController extends Controller
     public function create()
     {
         $ruangans = Ruangan::all();
-        // Anda bisa menginisialisasi $bookings di sini jika perlu
         return view('booking.booking-add', compact('ruangans'));
     }
 
@@ -70,18 +68,11 @@ class BookingController extends Controller
         $booking->waktu_pemakaian_awal = $waktuPemakaianAwal;
         $booking->waktu_pemakaian_akhir = $waktuPemakaianAkhir;
         $booking->tanggal = $request->input('tanggal');
+        $booking->status = 'pending';  // Status default adalah pending
         // Simpan ke database
         $booking->save();
 
         return redirect()->route('booking.index')->with('success', 'Reservasi berhasil ditambahkan');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -123,12 +114,17 @@ class BookingController extends Controller
         $booking->waktu_pemakaian_akhir = $waktuPemakaianAkhir;
         $booking->status = $request->input('status');
         $booking->tanggal = $request->input('tanggal');
+
+        // Cek apakah status berubah
+        if ($booking->status !== $request->input('status')) {
+            $booking->status_changed_at = Carbon::now();  // Set tanggal perubahan status
+        }
+
         // Simpan ke database
         $booking->save();
 
         return redirect()->route('booking.index')->with('success', 'Reservasi berhasil diedit');
     }
-
 
     public function checkBooking(Request $request)
     {
