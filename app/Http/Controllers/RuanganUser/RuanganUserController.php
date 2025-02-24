@@ -15,9 +15,12 @@ class RuanganUserController extends Controller
     {
         // Ambil parameter 'order' dari query string atau default 'asc'
         $order = $request->query('order', 'asc');
+        // Ambil query pencarian
+        $search = $request->query('search', '');
 
         // Ambil data ruangan berdasarkan harga dan lantai
-        $ruangans = Ruangan::orderBy('harga', $order)
+        $ruangans = Ruangan::where('nama_ruangan', 'like', "%{$search}%")
+            ->orderBy('harga', $order)
             ->orderBy('lantai', 'asc')
             ->get();
 
@@ -25,7 +28,8 @@ class RuanganUserController extends Controller
         $hargaUnik = Ruangan::select('harga')->distinct()->take(3)->pluck('harga');
 
         // Kirim data ke view
-        return view('ruangan-user.ruangan-user', compact('ruangans', 'hargaUnik', 'order'));
+
+        return view('ruangan-user.ruangan-user', compact('ruangans', 'hargaUnik', 'order', 'search'));
     }
 
     /**

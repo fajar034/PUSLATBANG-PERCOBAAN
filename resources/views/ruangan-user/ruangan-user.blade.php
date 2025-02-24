@@ -177,12 +177,19 @@
         <h1 class="mb-4 text-center">DAFTAR RUANGAN</h1>
 
         <!-- (BARU) Form Filter dan Pengurutan Harga -->
-        <form method="GET" action="/ruangan-user" class="mb-4">
-            <label for="order"><i class="fa-solid fa-arrow-down-short-wide"></i><p>Urutan</p></label>
-            <select name="order" value="fajar" id="order" onchange="this.form.submit()" class="select rounded">
-                <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Harga Terendah</option>
-                <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Harga Tertinggi</option>
-            </select>
+
+        <form method="GET" action="/ruangan-user" class="mb-4 d-flex justify-content-between">
+            <div>
+                <label for="order"><i class="fa-solid fa-arrow-down-short-wide"></i><p>Urutan</p></label>
+                <select name="order" value="fajar" id="order" onchange="this.form.submit()" class="select rounded">
+                    <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Harga Terendah</option>
+                    <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Harga Tertinggi</option>
+                </select>
+            </div>
+            <div class="d-flex align-items-end">
+                <input type="text" name="search" class="form-control" placeholder="Cari ruangan..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
         </form>
 
         <!-- (BARU), jangan dihapus, jika perlu digunakan
