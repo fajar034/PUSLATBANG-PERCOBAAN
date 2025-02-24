@@ -126,6 +126,9 @@ class BookingController extends Controller
         return redirect()->route('booking.index')->with('success', 'Reservasi berhasil diedit');
     }
 
+    /**
+     * Check if the booking time is already taken.
+     */
     public function checkBooking(Request $request)
     {
         $ruanganId = $request->input('ruangan_id');
@@ -143,6 +146,9 @@ class BookingController extends Controller
         return response()->json(['usedTimes' => $usedTimes]);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
         $booking = Booking::findOrFail($id);

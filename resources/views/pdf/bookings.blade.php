@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Booking</title>
+    <title>Invoice PDF</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 0;
         }
-
+        .kop-surat {
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.5;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .kop-surat .alamat {
+            font-size: 0.9em;
+            color: #555;
+        }
         h1 {
             text-align: center;
             color: #2c3e50;
             margin-bottom: 20px;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-
-        th,
-        td {
-            padding: 12px;
+        th, td {
+            padding: 10px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #ddd;
         }
-
         th {
             background-color: #f4f6f7;
             color: #2c3e50;
         }
-
-        tr:hover {
-            background-color: #f1f1f1;
+        .status-booked {
+            color: green;
+            font-weight: bold;
         }
-
-        .table-title {
-            background-color: #3498db;
-            color: white;
-            padding: 10px;
-            font-size: 1.2em;
-            text-align: center;
+        .status-pending {
+            color: orange;
+            font-weight: bold;
         }
-
+        .status-canceled {
+            color: red;
+            font-weight: bold;
+        }
         .footer {
             text-align: center;
             margin-top: 30px;
             font-size: 0.9em;
             color: #7f8c8d;
         }
-
-        .status-booked {
-            color: green;
-            font-weight: bold;
-        }
-
-        .status-pending {
-            color: orange;
-            font-weight: bold;
-        }
-
-        .status-canceled {
-            color: red;
-            font-weight: bold;
-        }
     </style>
 </head>
-
 <body>
 
-    <h1>Data Booking Ruangan</h1>
+    <div class="kop-surat">
+        LEMBAGA ADMINISTRASI NEGARA REPUBLIK INDONESIA<br>
+        PUSAT PELATIHAN DAN PENGEMBANGAN DAN KAJIAN HUKUM ADMINISTRASI NEGARA<br>
+        <div class="alamat">
+            Jalan Dr. Mr. Teuku Muhammad Hasan, Kec. Darul Imarah, Kab. Aceh Besar 23352<br>
+            Tlp. 0651-8010900; Fax. 0651-7552568; Website: aceh.lan.go.id; Email: puslatbang.khan@lan.go.id
+        </div>
+    </div>
+
+    <h1>Invoice Booking Ruangan</h1>
 
     <table>
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>Nama Ruangan</th>
-                <th>Nama Pengunjung</th>
-                <th>Waktu Pemakaian</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($bookings as $booking)
-                <tr>
-                    <td>{{ $booking->tanggal }}</td>
-                    <td>{{ $booking->ruangan ? $booking->ruangan->nama_ruangan : 'Tidak ada ruangan' }}</td>
-                    <td>{{ $booking->nama_pengunjung }}</td>
-                    <td>{{ $booking->waktu_pemakaian_awal }} - {{ $booking->waktu_pemakaian_akhir }}</td>
-                    <td class="status-{{ strtolower($booking->status) }}">{{ ucfirst($booking->status) }}</td>
-                </tr>
-            @endforeach
-        </tbody>
+    @foreach ($bookings as $booking)
+        <tr>
+            <th>Tanggal</th>
+            <td>{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</td>
+        </tr>
+        <tr>
+            <th>Nama Ruangan</th>
+            <td>{{ $booking->ruangan ? $booking->ruangan->nama_ruangan : 'Tidak ada ruangan' }}</td>
+        </tr>
+        <tr>
+            <th>Nama Pengunjung</th>
+            <td>{{ $booking->nama_pengunjung }}</td>
+        </tr>
+        <tr>
+            <th>Waktu Pemakaian</th>
+            <td>{{ $booking->waktu_pemakaian_awal }} - {{ $booking->waktu_pemakaian_akhir }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td class="status-{{ strtolower($booking->status) }}">{{ ucfirst($booking->status) }}</td>
+        </tr>
+        @endforeach
     </table>
 
     <div class="footer">
@@ -105,5 +104,4 @@
     </div>
 
 </body>
-
 </html>
