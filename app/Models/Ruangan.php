@@ -23,3 +23,4 @@ class Ruangan extends Model
         return $this->belongsTo(Pic::class);
     }
 }
+# ruangan
